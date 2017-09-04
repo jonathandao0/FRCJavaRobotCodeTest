@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -35,9 +34,6 @@ public class DriveTrain extends Subsystem {
 	};
 	
 	RobotDrive robotDrive = new RobotDrive(leftMotors[0], leftMotors[1], rightMotors[0], rightMotors[1]);
-	double leftJoyValue, prevLeftJoyValue = 0;
-	double rightJoyValue, prevRightJoyValue = 0;
-	double joyDelta, prevJoyDelta = 0;
 	
 	public DriveTrain(){
 		super();
@@ -121,69 +117,9 @@ public class DriveTrain extends Subsystem {
         robotDrive.setInvertedMotor(MotorType.kFrontRight, false);
         robotDrive.setInvertedMotor(MotorType.kRearLeft, false);
         robotDrive.setInvertedMotor(MotorType.kRearRight, false);
-        
-        robotDrive.tankDrive(Math.pow(leftStick.getAxis(AxisType.kY), 3), Math.pow(rightStick.getAxis(AxisType.kY), 3));
+    	robotDrive.tankDrive(Math.pow(leftStick.getAxis(AxisType.kY), 3), Math.pow(rightStick.getAxis(AxisType.kY), 3));
         //robotDrive.tankDrive(leftStick, rightStick);
     }
-	
-	public void driveWithAutopilot(Joystick leftStick, Joystick rightStick){
-		double leftAxis = Math.pow(leftStick.getAxis(AxisType.kY), 3);
-		double rightAxis = Math.pow(leftStick.getAxis(AxisType.kY), 3);
-		
-		final int forwardStraight = 1;
-		final int backwardsStraight = 2;
-		final int forwardTurn = 3;
-		final int backwardsTurn = 4;
-		
-		int state = 0;
-		if(joyDelta != 0){
-			if(Math.abs(leftAxis) > Math.abs(rightAxis)){
-				//if(leftAxis > 0)
-					
-			} else{
-				
-			}
-			
-			switch(state){
-			
-			
-			}
-		}
-		
-		robotDrive.tankDrive(leftAxis, rightAxis);
-	}
-	
-	public void sampleJoystickAxis(){
-		prevLeftJoyValue = leftJoyValue;
-		prevRightJoyValue = rightJoyValue;
-		leftJoyValue = Robot.oi.rightJoystick.getAxis(AxisType.kY);
-		rightJoyValue = Robot.oi.leftJoystick.getAxis(AxisType.kY);
-		
-		prevJoyDelta = joyDelta;
-		joyDelta = Math.abs(leftJoyValue - rightJoyValue);
-		
-		SmartDashboard.putNumber("prevLeftValue", prevLeftJoyValue);
-		SmartDashboard.putNumber("prevRightValue", prevRightJoyValue);
-		SmartDashboard.putNumber("leftValue", leftJoyValue);
-		SmartDashboard.putNumber("rightValue", rightJoyValue);
-		SmartDashboard.putNumber("prevJoyDelta", prevJoyDelta);
-		SmartDashboard.putNumber("joyDelta", joyDelta);
-	}
-	
-	double leftJoyFuzzy(){
-		// Move towards each other
-		
-	}
-	
-	double rightJoyFuzzy(){
-		if()
-		
-	}
-	
-	int fuzzyRules(){
-		
-	}
-	
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
