@@ -58,7 +58,7 @@ public class OI {
 		
 		leftJoyButtons[6].whenPressed(new SallySweeperOut());
 		leftJoyButtons[4].whenPressed(new SallySweeperIn());
-		
+			
 		rightJoyButtons[2].whileHeld(new FeederIntake());
 		rightJoyButtons[4].whenPressed(new FeederDeploy());
 		rightJoyButtons[6].whenPressed(new FeederRetract());

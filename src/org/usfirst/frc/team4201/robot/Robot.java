@@ -154,6 +154,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		
 		arm.updateSmartDashboard();
+		driveTrain.sampleJoystickAxis();
 	}
 
 	/**
