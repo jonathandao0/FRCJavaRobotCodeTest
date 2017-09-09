@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,7 +35,7 @@ public class DriveTrain extends Subsystem {
 	};
 	
 	RobotDrive robotDrive = new RobotDrive(leftMotors[0], leftMotors[1], rightMotors[0], rightMotors[1]);
-	
+	double leftJoyValue, prevLeftJoyValue = 0, rightJoyValue, prevRightJoyValue = 0, joyDelta, prevJoyDelta = 0;
 	public DriveTrain(){
 		super();
 		leftMotors[0].changeControlMode(TalonControlMode.PercentVbus);
@@ -120,6 +121,104 @@ public class DriveTrain extends Subsystem {
     	robotDrive.tankDrive(Math.pow(leftStick.getAxis(AxisType.kY), 3), Math.pow(rightStick.getAxis(AxisType.kY), 3));
         //robotDrive.tankDrive(leftStick, rightStick);
     }
+	
+	public void driveWithAutoPilot(Joystick leftStick, Joystick rightStick){
+		double leftAxis = Math.pow(leftStick.getAxis(AxisType.kY), 3);
+		double rightAxis = Math.pow(rightStick.getAxis(AxisType.kY), 3);
+		
+		
+		
+		robotDrive.tankDrive(leftAxis, rightAxis);
+	}
+	
+	double rightAxistAdjustment(double axisValue){
+		double rightOutput = axisValue
+		if(axisValue < -0.05 && axisValue > -0.95)
+			//rightOutput =;
+		else if(axisValue > 0.05 && axisValue < 0.95)
+		
+		return rightOutput;
+			
+	}
+	
+	double lefttAxistAdjustment(double axisValue){
+		
+	}
+
+	public void driveWithAdjustment(Joystick leftStick, Joystick rightStick){
+		double leftAxis = Math.pow(leftStick.getAxis(AxisType.kY), 3);
+		double rightAxis = Math.pow(rightStick.getAxis(AxisType.kY), 3);
+		int state = 0, state1 = 0, state2 = 0;
+		
+		if(rightAxis <  -0.95)
+			state1 = 1;
+		else if(rightAxis <= -0.05)
+			state1 = 2;
+		else if(rightAxis <= 0.05)
+			state1 = 3;
+		else if(rightAxis <= 0.95)
+			state1 = 4;
+		else
+			state1 = 5;
+		
+		if(leftAxis <  -0.95)
+			state2 = 1;
+		else if(leftAxis <= -0.05)
+			state2 = 2;
+		else if(leftAxis <= 0.05)
+			state2 = 3;
+		else if(leftAxis <= 0.95)
+			state2 = 4;
+		else
+			state2 = 5;
+		
+	if(state1 != 0 || state2 != 0)
+		state = state1 + (state2 * 5 - 1);
+		
+		switch(state){
+			case 2:
+			case 4:
+			case 12:
+				//rightAxis = decreaseRightOutput()
+				break;
+			case 14:
+			case 22:
+			case 24:
+			break;
+			case 1:
+			case 3:
+			case 5:
+			case 11:
+			case 13:
+			case 15:
+			case 21:
+			case 23:
+			case 25:
+			default:
+				break;
+		}
+		
+		robotDrive.tankDrive(leftAxis, rightAxis);
+	}
+	
+	public void updateDashboard(){
+		if(prevLeftJoyValue != leftJoyValue)
+			prevLeftJoyValue = leftJoyValue;
+		if(prevRightJoyValue != rightJoyValue)
+			prevRightJoyValue = rightJoyValue;
+		
+		joyDelta = leftJoyValue - rightJoyValue;
+		
+		if(prevJoyDelta != joyDelta)
+			prevJoyDelta = joyDelta;
+		
+		SmartDashboard.putNumber("prevLeftJoyValue", prevLeftJoyValue);
+		SmartDashboard.putNumber("leftJoyValue", leftJoyValue);
+		SmartDashboard.putNumber("prevRightJoyValue", prevRightJoyValue);
+		SmartDashboard.putNumber("rightJoyValue", rightJoyValue);
+		SmartDashboard.putNumber("prevJoyDelta", prevJoyDelta);
+		SmartDashboard.putNumber("joyDelta", joyDelta);
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
