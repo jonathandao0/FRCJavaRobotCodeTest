@@ -122,27 +122,39 @@ public class DriveTrain extends Subsystem {
         //robotDrive.tankDrive(leftStick, rightStick);
     }
 	
+	public void sampleJoystickAxis() {
+		
+		
+	}
+	
 	public void driveWithAutoPilot(Joystick leftStick, Joystick rightStick){
-		double leftAxis = Math.pow(leftStick.getAxis(AxisType.kY), 3);
-		double rightAxis = Math.pow(rightStick.getAxis(AxisType.kY), 3);
+		double leftValue = Math.pow(leftStick.getAxis(AxisType.kY), 3);
+		double rightValue = Math.pow(rightStick.getAxis(AxisType.kY), 3);
 		
+		if(Math.abs(leftStick.getAxis(AxisType.kY)) > 40 || Math.abs(rightStick.getAxis(AxisType.kY)) > 40) {
+			
+		} else {
+			leftValue = Math.pow(leftStick.getAxis(AxisType.kY), 3);
+			rightValue = Math.pow(rightStick.getAxis(AxisType.kY), 3);
+		}
 		
-		
-		robotDrive.tankDrive(leftAxis, rightAxis);
+		robotDrive.tankDrive(leftValue, rightValue);
 	}
 	
 	double rightAxistAdjustment(double axisValue){
-		double rightOutput = axisValue
-		if(axisValue < -0.05 && axisValue > -0.95)
+		double rightOutput = axisValue;
+		//if(axisValue < -0.05 && axisValue > -0.95)
 			//rightOutput =;
-		else if(axisValue > 0.05 && axisValue < 0.95)
+		///else if(axisValue > 0.05 && axisValue < 0.95)
 		
 		return rightOutput;
 			
 	}
 	
 	double lefttAxistAdjustment(double axisValue){
+		double leftOutput = axisValue;
 		
+		return leftOutput;
 	}
 
 	public void driveWithAdjustment(Joystick leftStick, Joystick rightStick){
@@ -176,15 +188,38 @@ public class DriveTrain extends Subsystem {
 		state = state1 + (state2 * 5 - 1);
 		
 		switch(state){
+			case 7:
+				//???
+				break;
+			case 9:
+				//???
+				break;
+			case 17:
+				//???
+				break;
+			case 19:
+				//???
+				break;
+			case 6:
+			case 16:
+			case 18:
+				//leftAxis = decreaseLeftOutpu();
+				break;
+			case 8:
+			case 10:
+			case 20:
+				//leftAxis = increaseLeftOutpu();
+				break;
 			case 2:
 			case 4:
-			case 12:
+			case 14:
 				//rightAxis = decreaseRightOutput()
 				break;
-			case 14:
+			case 12:
 			case 22:
 			case 24:
-			break;
+				//rightAxis = increaseRightOutput()
+				break;
 			case 1:
 			case 3:
 			case 5:
@@ -199,6 +234,16 @@ public class DriveTrain extends Subsystem {
 		}
 		
 		robotDrive.tankDrive(leftAxis, rightAxis);
+	}
+	
+	public void differentialDrive(Joystick leftstick, Joystick rightStick) {
+		if()
+		
+	}
+	
+	public void differentialAlgorithm(Joystick joystick) {
+		if(joystick.)
+		
 	}
 	
 	public void updateDashboard(){

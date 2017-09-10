@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4201.robot.subsystems;
 
+import org.usfirst.frc.team4201.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

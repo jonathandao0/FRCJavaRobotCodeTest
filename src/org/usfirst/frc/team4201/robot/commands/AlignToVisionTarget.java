@@ -2,8 +2,11 @@ package org.usfirst.frc.team4201.robot.commands;
 
 import org.usfirst.frc.team4201.robot.Robot;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 public class AlignToVisionTarget extends Command{
-	 public ArmTest() {
+	 
+		public AlignToVisionTarget() {
 	    	//super(seconds);
 	    	requires(Robot.arm);
 	    }
